@@ -3,28 +3,27 @@ import sys
 from flask import Flask, render_template, request, send_from_directory
 from Image_class import Image
 
-# from flask_bootstrap import Bootstrap
-
 __author__ = 'ibininja'
 
 app = Flask(__name__)
-# Bootstrap(app)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 #Global Var
 working_image=0
 
+# render index.html
 @app.route("/")
 def index():
     return render_template("index.html")
 
-
+# upload and save image
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
     global working_image
     target = os.path.join(APP_ROOT, 'static/')
     print(target)
 
+    # create directory if it doesnt exist
     if not os.path.isdir(target):
         os.mkdir(target)
 
@@ -33,7 +32,6 @@ def upload():
         filename = file.filename
         destination = "/".join([target, filename])
         print(destination)
-        # print >> sys.stderr, destination
         file.save(destination)
 
     # Creat instance of class
@@ -48,19 +46,12 @@ def upload():
     # Pass the place where the image is stored through this render
     return render_template("complete.html", image_name=fname_index_image)
 
-
+# send the file
 @app.route('/upload/<filename>')
 def send_image(filename):
     return send_from_directory("static", filename)
 
-
-@app.route('/gallery')
-def get_gallery():
-    image_names = os.listdir('./images')
-    print(image_names)
-    return render_template("gallery.html", image_names=image_names)
-
-
+# accept user input and pass it Image_class methods
 @app.route('/upload/user_input', methods=['GET', 'POST'])
 def select():
     global working_image
@@ -75,7 +66,6 @@ def select():
     fname_measured_image, path = working_image.generate_measured_image()
 
     print("fname_measured_image: " + str(fname_measured_image))
-
 
     return render_template("final.html",image_name=fname_measured_image)
 
