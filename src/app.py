@@ -16,7 +16,7 @@ working_image=0
 def index():
     return render_template("index.html")
 
-# upload and save image
+# Upload and save image
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
     global working_image
@@ -36,36 +36,27 @@ def upload():
 
     # Creat instance of class
     # Generate Image with numbered objects
-
-    #Change to filename,path
+    # Change to filename,path
     working_image= Image(filename, target)
     fname_index_image, path = working_image.generate_index_image()
-    print ("Filename:" + fname_index_image)
-    print ("Path:" + path)
 
-    # Pass the place where the image is stored through this render
     return render_template("complete.html", image_name=fname_index_image)
 
-# send the file
+# Send the file
 @app.route('/upload/<filename>')
 def send_image(filename):
     return send_from_directory("static", filename)
 
-# accept user input and pass it Image_class methods
+# Accept user input and pass it Image_class methods
 @app.route('/upload/user_input', methods=['GET', 'POST'])
 def select():
     global working_image
     target_object = request.values['target_object']
     ref_object = request.values['ref_object']
 
-    print("target object"+str(target_object))
-    print("ref object"+str(ref_object))
-
     working_image.update_ref_object_index(int(ref_object))
     working_image.update_measure_object_index(int(target_object))
     fname_measured_image, path = working_image.generate_measured_image()
-
-    print("fname_measured_image: " + str(fname_measured_image))
 
     return render_template("final.html",image_name=fname_measured_image)
 
