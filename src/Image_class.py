@@ -34,10 +34,10 @@ class Image:
         return x_midpoint, y_midpoint
 
     def update_measure_object_index(self, measure_object_index):
-        self.measure_object_index = measure_object_index - 1  # Offset due to indexing of arrays
+        self.measure_object_index = measure_object_index
 
     def update_ref_object_index(self, ref_object_index):
-        self.ref_object_index = ref_object_index - 1  # Offset due to indexing of arrays
+        self.ref_object_index = ref_object_index
 
     # TODO:Comment on how it works
     def get_pixel_per_unit(self, ref_object):
@@ -200,11 +200,11 @@ class Image:
 Class testcase
 """
 
-"""
-# Test of Typical Usecase
 
+# Test of Typical Usecase
+"""
 fname_raw_image = "Image_refrence.jpg"
-file_path = "images/"
+file_path = "static/"
 
 working_image = Image(fname_raw_image, file_path)
 

@@ -67,12 +67,16 @@ def select():
     target_object = request.values['target_object']
     ref_object = request.values['ref_object']
 
+    print("target object"+str(target_object))
+    print("ref object"+str(ref_object))
+
     working_image.update_ref_object_index(int(ref_object))
     working_image.update_measure_object_index(int(target_object))
     fname_measured_image, path = working_image.generate_measured_image()
 
-    return render_template("final.html",image_name=fname_measured_image)
+    print("fname_measured_image: " + str(fname_measured_image))
 
+    return render_template("final.html",image_name=fname_measured_image)
 
 if __name__ == "__main__":
     app.run(port=4555, debug=True)
