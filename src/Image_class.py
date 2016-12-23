@@ -2,7 +2,7 @@ import numpy as np
 from scipy.spatial import distance as dist
 import cv2
 import imutils
-from Measurement_class import Measurement
+
 
 # Global Definitions
 GREEN = (0, 255, 0)
@@ -51,8 +51,8 @@ class Image:
     def get_bounding_box(self, c):
         box = cv2.minAreaRect(c)
         print("box calling ", box)
-        # print("c is :" + str(c)) ATM contors array being passed in here
-        # TODO:Is this nessary
+
+        #If using older version of openCv
         if imutils.is_cv2():
             box = cv2.cv.BoxPoints(box)
         else:
@@ -86,7 +86,7 @@ class Image:
 
 
     def import_image_and_extract_contors(self):
-        image = cv2.imread(self.fpath + self.fname_image)                #Read In Image
+        image = cv2.imread(str(self.fpath) + str(self.fname_image))               #Read In Image
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)                  #Convert to GreyScale
         gray = cv2.GaussianBlur(gray, (7, 7), 0)                        #blur using GaussianBlur
         detected_edges = cv2.Canny(gray, 50, 100)                       #Edge Detection
@@ -195,32 +195,3 @@ class Image:
 
         cv2.imwrite(self.fpath + "measured_image_" + self.fname_image, orig)
         return ("measured_image_" + self.fname_image, self.fpath)
-
-"""
-Class testcase
-"""
-
-
-# Test of Typical Usecase
-"""
-fname_raw_image = "Image_refrence.jpg"
-file_path = "static/"
-
-working_image = Image(fname_raw_image, file_path)
-
-# Generate Image with numbered objects
-fname_index_image, path = working_image.generate_index_image()
-
-# Display this image to user, prenesent with screen to choose ref object number and object to measure number
-# User inputs these numbers, Clicks Okay
-measure_object_index = 4
-ref_object_index = 3
-# Update Fields in Class
-working_image.update_ref_object_index(ref_object_index)
-working_image.update_measure_object_index(measure_object_index)
-
-# Generate Image with measurement
-fname_measured_image, path = working_image.generate_measured_image()
-
-# Display this measured image to user
-"""
