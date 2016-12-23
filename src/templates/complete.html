@@ -11,7 +11,7 @@
 
 <div class="container">
 <p style="text-align:center;"></p>
-	<img src="{{url_for('static', filename = image_name)}}" style="margin-top:10%;" width="400" height="325" />
+	<img src="{{url_for('send_image', filename = image_name)}}" style="margin-top:10%;" width="400" height="325" />
 	<form id="contact" action="{{url_for('select')}}" method="GET" enctype="text/plain">
   	<fieldset>
     		<input placeholder="Choose reference object" type="text" tabindex="1" required autofocus name = "ref_object" min="1">

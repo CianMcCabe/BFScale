@@ -8,56 +8,33 @@ from Image_class import Image
 
 class MyTest(unittest.TestCase):
     def test_midpoint(self):
-        test_image = Image("","")
+        test_image = Image("Image_refrence.jpg","static/")
         #correct values
         self.assertEqual(test_image.midpoint([10,10],[20,20]),(15,15))
         #test fail
+
+        """ To test
+        update_measure_object_index(self, measure_object_index)
+        update_ref_object_index(self, ref_object_index)
         #self.assertEqual(test_image.midpoint([10,10],[20,20]),(0,0)
-unittest.main()
 
-"""
-#####Unit test for get_pixel_per_unit function
-def get_pixel_per_unit(self,ref_object, ref_width):
-        box = self.get_bounding_box(ref_object)
-        points = self.get_distance_cordinate_points(box)
-        distX, distY = points[0][0], points[0][1] #TODO: Bad Smell distX never used
-        pixelsPerUnit = distY / ref_width
-        dimensionY = distY / pixelsPerUnit
-       # print("sucessful excution of get_pixel_per_unit")
-       # print("ref object is :" + str(ref_object))
-        if dimensionY == ref_width:
-          print("dimensionY == ref_width")
-        return pixelsPerUnit
-
-
-class MyTest(unittest.TestCase):
-    def get_pixel_per_unit(self):
         #correct values
         self.assertEqual(get_pixel_per_unit(Valid input1),(Expected Output))
         #test fail
         self.assertEqual(get_pixel_per_unit(Invalid Input),(Unexpected output))
 
-
-
-
-  def get_bounding_box(self, c):
-    box = cv2.minAreaRect(c)
-    print("box calling ", box)
-   # print("c is :" + str(c)) ATM contors array being passed in here 
-    #TODO:Is this nessary
-    if imutils.is_cv2():
-        box = cv2.cv.BoxPoints(box)
-    else:
-        box = cv2.boxPoints(box)
-
-    box = np.array(box, dtype="int")
-
-class MyTest(unittest.TestCase):
-    def get_bounding_box(self):
         #correct values
         self.assertEqual(get_bounding_box(Valid input1),(Expected Output))
         #test fail
         self.assertEqual(get_bounding_box(Invalid Input),(Unexpected output))
+        """
+
+unittest.main()
+
+
+class MyTest(unittest.TestCase):
+    def get_bounding_box(self):
+
 
 
 #Test for method extract_contours_and_import_image

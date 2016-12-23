@@ -51,7 +51,7 @@ def upload():
 
 @app.route('/upload/<filename>')
 def send_image(filename):
-    return send_from_directory("static/", filename)
+    return send_from_directory("static", filename)
 
 
 @app.route('/gallery')
@@ -75,6 +75,7 @@ def select():
     fname_measured_image, path = working_image.generate_measured_image()
 
     print("fname_measured_image: " + str(fname_measured_image))
+
 
     return render_template("final.html",image_name=fname_measured_image)
 
