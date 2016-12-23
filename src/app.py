@@ -81,21 +81,3 @@ def select():
 
 if __name__ == "__main__":
     app.run(port=4555, debug=True)
-
-    #
-    # Code to be put in, Order things will happen in
-    #
-
-    # Upload image, save as destination
-
-
-    # Display this image to user, prenesent with screen to choose ref object number and object to measure number
-    # User inputs these numbers, Clciks Okay
-
-    # Update Fields in Class
-
-
-    # Generate Image with measurement
-
-
-    # Display this measured image to user

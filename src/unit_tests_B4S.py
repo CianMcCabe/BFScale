@@ -1,89 +1,49 @@
-#####Unit test for midpoint function
-
-######
-#####
+#####Unit tests for Image Class
 
 import unittest
 from Image_class import Image
 
+
+global test_image
+
+FNAME = "Control_Image.jpg"
+FDIR = "static/"
+INDEX = 42
+
 class MyTest(unittest.TestCase):
+    def setUp(self):
+        global test_image
+        test_image = Image(FNAME, FDIR)
+
     def test_midpoint(self):
-        test_image = Image("Image_refrence.jpg","static/")
-        #correct values
-        self.assertEqual(test_image.midpoint([10,10],[20,20]),(15,15))
-        #test fail
+        self.assertEqual(test_image.midpoint([10,10],[20,20]),(15,15),
+                         msg="Failure:Midpoint")
 
-        """ To test
-        update_measure_object_index(self, measure_object_index)
-        update_ref_object_index(self, ref_object_index)
-        #self.assertEqual(test_image.midpoint([10,10],[20,20]),(0,0)
+    def test_gen_index_image(self):
+        self.assertEqual(first=test_image.generate_index_image(), second=("index_image_" + FNAME, FDIR),
+                         msg="Failure:Generate index Image")
 
-        #correct values
-        self.assertEqual(get_pixel_per_unit(Valid input1),(Expected Output))
-        #test fail
-        self.assertEqual(get_pixel_per_unit(Invalid Input),(Unexpected output))
+    def test_gen_measured_image(self):
+        self.assertEqual(first=test_image.generate_measured_image(), second=("measured_image_" + FNAME, FDIR),
+                         msg="Failure:Generate measured Image")
 
-        #correct values
-        self.assertEqual(get_bounding_box(Valid input1),(Expected Output))
-        #test fail
-        self.assertEqual(get_bounding_box(Invalid Input),(Unexpected output))
-        """
+    def test_update_measure_object_index(self):
+        test_image.update_measure_object_index(INDEX)
+        self.assertEqual(first=test_image.measure_object_index, second= INDEX,
+                         msg='Failure:Update Measure Object')
+
+    def test_update_ref_object_index(self):
+        test_image.update_ref_object_index(INDEX)
+        self.assertEqual(first=test_image.ref_object_index, second=INDEX,
+                         msg='Failure:Update Measure Object')
+
+    #TODO: Implement tests for the following if time
+    # def test_get_pixel_per_unit(self):
+    # def test_get_bounding_box(self):
+    # def test_get_distance_cordinate_points(self):
+    # def test_import_image_and_extract_contors(self):
 
 unittest.main()
-
-
-class MyTest(unittest.TestCase):
-    def get_bounding_box(self):
-
-
-
-#Test for method extract_contours_and_import_image
-
- def extract_contors_and_import_image(self):
-      # read the image
-      # image = cv2.imread(args["image"])
-      image = cv2.imread(self.fname_image)
-      # convert the image to gray scale, and blur it using GaussianBlur
-      gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-      gray = cv2.GaussianBlur(gray, (7, 7), 0)
-      # perform edge detection,
-      detected_edges = cv2.Canny(gray, 50, 100)
-      # perform a dilation
-      detected_edges = cv2.dilate(detected_edges, None, iterations=1)
-      # perform erosion to close gaps in between object edges
-      detected_edges = cv2.erode(detected_edges, None, iterations=1)
-      # find contours in the edge map
-      cntores = cv2.findContours(detected_edges.copy(), cv2.RETR_EXTERNAL,
-                                 cv2.CHAIN_APPROX_SIMPLE)
-      print("sucessful excution of extract_contors_and_import_image")
-      return cntores, image
-
-
-class MyTest(unittest.TestCase):
-    def extract_contors_and_import_image(self):
-        #correct values
-        self.assertEqual(extract_contors_and_import_image(Valid input1),(Expected Output))
-        #test fail
-        self.assertEqual(extract_contors_and_import_image(Invalid Input),(Unexpected output))
-
-
-#Test for method extract_contours_and_import_image		
- def print_dimensions_on_object(self, X_top_left_top_right, X_top_right_bottom_right, Y_top_left_top_right,
-                                 Y_top_right_bottom_right, distX, distY, orig, pixelsPerUnit):
-      # Drawing the objects according to their size on the image
-      cv2.putText(orig, "{:.1f}in".format(distX / pixelsPerUnit),
-                  (int(X_top_left_top_right - 15), int(Y_top_left_top_right - 10)), cv2.FONT_HERSHEY_SIMPLEX, 0.65,
-                  WHITE, 2)
-      cv2.putText(orig, "{:.1f}in".format(distY / pixelsPerUnit),
-                  (int(X_top_right_bottom_right + 10), int(Y_top_right_bottom_right)), cv2.FONT_HERSHEY_SIMPLEX, 0.65,
-                  WHITE, 2)
-class MyTest(unittest.TestCase):
-    def extract_contors_and_import_image(self):
-        #correct values
-        self.assertEqual(extract_contors_and_import_image(Valid input1),(Expected Output))
-        #test fail
-        self.assertEqual(extract_contors_and_import_image(Invalid Input),(Unexpected output))
-"""
 
 
 
